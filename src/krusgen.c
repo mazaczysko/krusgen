@@ -26,17 +26,21 @@ void mazeGrid( )
 	uint16_t i, j, k = 1;
 	for( j = 0; j< maze.height; j++ )
 	{
-		if( j % 2 )
+		if( j % 2 == 0  )
 		{
 			for( i = 0; i < maze.width; i++)
 			{
-				if( i % 2)
+				if( i % 2 == 0 )
 					maze.maze[i][j] = k++;
 			}
 		}
 	}
 }
 
+void mazeGen( )
+{
+
+}
 int wallsList( )
 {
 	uint32_t i, j, c = 0;
@@ -58,7 +62,7 @@ int wallsList( )
 			free( maze.walls );
 			return 1;
 		}
-	c = 0;	
+	c = 0;
 		for( i = 0; i < maze.width; i++ )
 		{
 			for( j = 0; j < maze.height; j++)
@@ -96,12 +100,12 @@ void mazeDraw( )
 
 int main( )
 {
-	maze.width = 32;
-	maze.height = 32;
+	maze.width = 31;
+	maze.height = 31;
 
 	mazeInit( );
 	mazeGrid( );
-	mazeDraw( );
 	wallsList( );
+	mazeDraw( );
 	return 0;
 }
