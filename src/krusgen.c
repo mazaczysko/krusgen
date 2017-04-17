@@ -2,10 +2,12 @@
 #include <inttypes.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct
 {
-	uint16_t width, height, **walls;
+	unsigned int width, height;
+	uint16_t **walls;
 	uint32_t **maze, wallcnt;
 }maze;
 
@@ -57,7 +59,7 @@ void mazeGen( )
 	srand( time( NULL ) );
 	while( maze.wallcnt )
 	{
-		int r = rand( ) % maze.wallcnt, w = 0, h = 0;
+		unsigned int r = rand( ) % maze.wallcnt, w = 0, h = 0;
 		w = maze.walls[r][0];
 		h = maze.walls[r][1];
 		maze.walls[r][0] = maze.walls[maze.wallcnt - 1][0];
@@ -131,11 +133,45 @@ void mazeDraw( )
 
 }
 
-int main( )
+int main( int argc, char **argv )
 {
+	int i, badarg;
 	maze.width = 31;
-	maze.height = 15;
+	maze.height = 31;
+	for( i = 1; i < argc; i++)
+	{
+		badarg = 1;
+		if( !strcmp( argv[i], "-x" ) )
+		{
+			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.width ) )
+			{
+				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
+				return 1;
+			}
+			badarg = 0;
+		}
 
+		if( !strcmp( argv[i], "-y" ) )
+		{
+			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) )
+			{
+				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
+				return 1;
+			}
+			badarg = 0;
+		}
+
+		if (badarg)
+		{
+			fprintf(stderr, "%s: bad argument '%s'\n", argv[0], argv[i]);
+			return 1;
+		}
+	}
+	if( maze.width % 2 == 0 || maze.height % 2 == 0 )
+	{
+		fprintf( stderr, "%s: dimensions must be odd!\n", argv[0]);
+		return 1;
+	}
 	mazeInit( );
 	mazeGrid( );
 	wallsList( );
