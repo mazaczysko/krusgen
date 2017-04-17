@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <inttypes.h>
+#include <time.h>
 #include <stdlib.h>
 
 struct
@@ -37,9 +38,42 @@ void mazeGrid( )
 	}
 }
 
+void mazeFlood( uint16_t x, uint16_t y, uint32_t old, uint32_t val )
+{
+	if( x >= maze.width || y >= maze.height || x < 0 || y <0 ) return;
+	if( maze.maze[x][y] != old) return;
+
+	maze.maze[x][y] = val;
+
+	mazeFlood( x-1, y, old, val);
+	mazeFlood( x+1, y, old, val);
+	mazeFlood( x, y-1, old, val);
+	mazeFlood( x, y+1, old, val);
+
+}
+
 void mazeGen( )
 {
-
+	srand( time( NULL ) );
+	while( maze.wallcnt )
+	{
+		int r = rand( ) % maze.wallcnt, w = 0, h = 0;
+		w = maze.walls[r][0];
+		h = maze.walls[r][1];
+		maze.walls[r][0] = maze.walls[maze.wallcnt - 1][0];
+		maze.walls[r][1] = maze.walls[maze.wallcnt - 1][1];
+		maze.wallcnt--;
+			if( w > 0 && w < maze.width - 1 && maze.maze[w+1][h] != 0 && maze.maze[w-1][h] != 0&& maze.maze[w+1][h] != maze.maze[w-1][h] )
+			{
+				maze.maze[w][h] = maze.maze[w+1][h];
+				mazeFlood( w-1, h, maze.maze[w-1][h], maze.maze[w+1][h]);
+			}
+			if( h > 0 && h < maze.height - 1 && maze.maze[w][h+1] != 0 && maze.maze[w][h-1] !=0 && maze.maze[w][h+1] != maze.maze[w][h-1] )
+			{
+				maze.maze[w][h] = maze.maze[w][h+1];
+				mazeFlood( w, h-1, maze.maze[w][h-1], maze.maze[w][h+1]);
+			}
+		}
 }
 int wallsList( )
 {
@@ -75,7 +109,6 @@ int wallsList( )
 				}
 			}
 		}
-	printf("\nWalls count:%d\n",c);
 	return 0;
 }
 
@@ -101,11 +134,12 @@ void mazeDraw( )
 int main( )
 {
 	maze.width = 31;
-	maze.height = 31;
+	maze.height = 15;
 
 	mazeInit( );
 	mazeGrid( );
 	wallsList( );
+	mazeGen( );
 	mazeDraw( );
 	return 0;
 }
