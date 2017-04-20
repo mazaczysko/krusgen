@@ -161,6 +161,32 @@ int main( int argc, char **argv )
 			badarg = 0;
 		}
 
+		if( !strcmp( argv[i], "-o" ) )
+		{
+			mazeInit( );
+			mazeGrid( );
+			wallsList( );
+			mazeGen( );
+			mazeDraw( );
+			char* filename = argv[i+1];
+			FILE *f = fopen(filename, "w");
+			uint16_t i, j;
+
+			for( i = 0; i < maze.height; i++ )
+			{
+				for( j = 0; j < maze.width; j++ )
+					if ( maze.maze[j][i] )
+					{
+						fputc( ' ', f );
+					}
+					else
+					{
+						fputc( '#', f );
+					}
+			}
+			badarg = 0;
+			return 0;
+		}
 		if (badarg)
 		{
 			fprintf(stderr, "%s: bad argument '%s'\n", argv[0], argv[i]);
