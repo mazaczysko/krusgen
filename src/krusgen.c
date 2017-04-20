@@ -161,7 +161,14 @@ int main( int argc, char **argv )
 			badarg = 0;
 		}
 
-		if( !strcmp( argv[i], "-o" ) )
+		if( !strcmp( argv[i], "-h" ) || !strcmp( argv[i], "--help" ) )
+		{
+			printf("\nDefault width: 31\nDefault height: 31\n\n-h, --help                          show help\n-x [odd number]                     define map width, if not defined, set default width \n-y [odd mumber]                     define map height, if not defined set default height\n-t, --txt [output file name.txt]    export maze to .txt file\n");
+			badarg = 0;
+			return 0;
+		}
+
+		if( !strcmp( argv[i], "--txt" ) || !strcmp( argv[i], "-t" ) )
 		{
 			mazeInit( );
 			mazeGrid( );
@@ -183,6 +190,7 @@ int main( int argc, char **argv )
 					{
 						fputc( '#', f );
 					}
+				fputc('\n',f );
 			}
 			badarg = 0;
 			return 0;
