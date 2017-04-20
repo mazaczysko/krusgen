@@ -114,7 +114,7 @@ int wallsList( )
 	return 0;
 }
 
-void mazeDraw( )
+void mazeDraw( FILE *f )
 {
 	uint16_t i, j;
 	for( i = 0; i < maze.height; i++ )
@@ -122,13 +122,13 @@ void mazeDraw( )
 		for( j = 0; j < maze.width; j++ )
 			if ( maze.maze[j][i] )
 			{
-				printf(" ");
+				fprintf(f, " ");
 			}
 			else
 			{
-				printf("#");
+				fprintf(f, "#");
 			}
-		printf("\n");
+		fprintf(f, "\n");
 	}
 
 }
@@ -136,6 +136,7 @@ void mazeDraw( )
 int main( int argc, char **argv )
 {
 	int i, badarg;
+	FILE *outfile = stdout;
 	maze.width = 31;
 	maze.height = 31;
 	for( i = 1; i < argc; i++)
@@ -163,37 +164,16 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-h" ) || !strcmp( argv[i], "--help" ) )
 		{
-			printf("\nDefault width: 31\nDefault height: 31\n\n-h, --help                          show help\n-x [odd number]                     define map width, if not defined, set default width \n-y [odd mumber]                     define map height, if not defined set default height\n-t, --txt [output file name.txt]    export maze to .txt file\n");
+			printf("\nDefault width: 31\nDefault height: 31\n\n-h, --help                          show help\n-x [odd number]                     define map width, if not defined, set default width \n-y [odd mumber]                     define map height, if not defined set default height\n-t, --txt [output file name.txt]    export maze to .txt file ");
 			badarg = 0;
 			return 0;
 		}
 
+
 		if( !strcmp( argv[i], "--txt" ) || !strcmp( argv[i], "-t" ) )
 		{
-			mazeInit( );
-			mazeGrid( );
-			wallsList( );
-			mazeGen( );
-			mazeDraw( );
-			char* filename = argv[i+1];
-			FILE *f = fopen(filename, "w");
-			uint16_t i, j;
-
-			for( i = 0; i < maze.height; i++ )
-			{
-				for( j = 0; j < maze.width; j++ )
-					if ( maze.maze[j][i] )
-					{
-						fputc( ' ', f );
-					}
-					else
-					{
-						fputc( '#', f );
-					}
-				fputc('\n',f );
-			}
+			outfile = fopen(argv[++i], "w");
 			badarg = 0;
-			return 0;
 		}
 		if (badarg)
 		{
@@ -210,6 +190,7 @@ int main( int argc, char **argv )
 	mazeGrid( );
 	wallsList( );
 	mazeGen( );
-	mazeDraw( );
+	mazeDraw( outfile );
+	fclose( outfile );
 	return 0;
 }
