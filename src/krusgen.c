@@ -3,6 +3,13 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include "bmp.h"
+
+#define KRUSGEN_VERSION "v0.5"
+
+#define FLAG_BMP ( 1 << 0 )
+#define FLAG_TXT ( 1 << 1 )
+uint16_t flags = 0;
 
 struct
 {
@@ -133,9 +140,31 @@ void mazeDraw( FILE *f )
 
 }
 
+void mazeBmp( FILE *f, uint32_t colwall, uint32_t colair )
+{
+	uint16_t i, j;
+	BMP2 bmp;
+	bmpInit( &bmp, maze.width, maze.height );
+	for( i = 0; i < maze.width; i++ )
+	{
+		for( j = 0; j < maze.height; j++ )
+			if ( maze.maze[i][j] )
+			{
+				bmp.imageData[i][j].colnum = colwall;
+			}
+			else
+			{
+				bmp.imageData[i][j].colnum = colair;
+			}
+	}
+	bmpWrite( &bmp, f );
+	bmpFree( &bmp );
+}
+
 int main( int argc, char **argv )
 {
 	int i, badarg;
+	uint32_t colwall = 0xFFFFFF, colair = 0x000000;
 	FILE *outfile = stdout;
 	maze.width = 31;
 	maze.height = 31;
@@ -164,7 +193,15 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-h" ) || !strcmp( argv[i], "--help" ) )
 		{
-			printf("\nDefault width: 31\nDefault height: 31\n\n-h, --help                          show help\n-x [odd number]                     define map width, if not defined, set default width \n-y [odd mumber]                     define map height, if not defined set default height\n-t, --txt [output file name.txt]    export maze to .txt file ");
+			printf(	"%s " KRUSGEN_VERSION " - maze generator\n" \
+					"Usage: %s [OPTIONS]\n\n" \
+					"Supported options:\n" \
+					"\t-h, --help - show help\n" \
+					"\t-x [odd number] - define map width\n" \
+					"\t-y [odd number] - define map height\n" \
+					"\t-t, --txt [file name.txt] - export maze to .txt file\n" \
+					"\n-b, --bmp [file name.bmp] - export maze to .bmp file\n"
+					, argv[0], argv[0] );
 			badarg = 0;
 			return 0;
 		}
@@ -172,9 +209,66 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--txt" ) || !strcmp( argv[i], "-t" ) )
 		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
 			outfile = fopen(argv[++i], "w");
+			if( outfile == NULL )
+			{
+				fprintf(stderr, "%s: cannot open file\n", argv[0] );
+			}
+			flags |= FLAG_TXT;
 			badarg = 0;
 		}
+
+		if( !strcmp( argv[i], "--bmp" ) || !strcmp( argv[i], "-b" ) )
+		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			outfile = fopen(argv[++i], "w");
+			if( outfile == NULL )
+			{
+				fprintf(stderr, "%s: cannot open file\n", argv[0] );
+			}
+			flags |= FLAG_BMP;
+			badarg = 0;
+		}
+
+		if( !strcmp( argv[i], "--air" ) || !strcmp( argv[i], "-a" ) )
+		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			if( sscanf( argv[++i], "%06x", &colair ) != 1)
+			{
+				fprintf( stderr, "%s: bad value '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			badarg = 0;
+		}
+
+		if( !strcmp( argv[i], "--wall" ) || !strcmp( argv[i], "-w" ) )
+		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			if( sscanf( argv[++i], "%06x", &colwall ) != 1)
+			{
+				fprintf( stderr, "%s: bad value '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			badarg = 0;
+		}
+
 		if (badarg)
 		{
 			fprintf(stderr, "%s: bad argument '%s'\n", argv[0], argv[i]);
@@ -190,7 +284,14 @@ int main( int argc, char **argv )
 	mazeGrid( );
 	wallsList( );
 	mazeGen( );
-	mazeDraw( outfile );
+	if( flags & FLAG_BMP && flags & FLAG_TXT )
+	{
+		fprintf( stderr, "%s: cannot export to .bmp and .txt files at once\n", argv[0]);
+	}
+	if( flags & FLAG_BMP )
+		mazeBmp( outfile, colwall, colair );
+	else
+		mazeDraw( outfile );
 	fclose( outfile );
 	return 0;
 }
