@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
-#include "bmp.h"
+#include <obos.h>
 #include "maze.h"
 
 #define KRUSGEN_VERSION "v0.5"

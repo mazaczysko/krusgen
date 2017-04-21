@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
-#include "bmp.h"
+#include <obos.h>
 struct
 {
 	unsigned int width, height;

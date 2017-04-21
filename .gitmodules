@@ -1,0 +1,3 @@
+[submodule "libobos"]
+	path = libobos
+	url = https://github.com/Jacajack/libobos
