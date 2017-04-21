@@ -200,7 +200,9 @@ int main( int argc, char **argv )
 					"\t-x [odd number] - define map width\n" \
 					"\t-y [odd number] - define map height\n" \
 					"\t-t, --txt [file name.txt] - export maze to .txt file\n" \
-					"\n-b, --bmp [file name.bmp] - export maze to .bmp file\n"
+					"\t-b, --bmp [file name.bmp] - export maze to .bmp file\n" \
+					"\t-w, --wall [hexadecimal] - define wall color in bmp\n" \
+					"\t-a, --air [hexadecimal] - define air color in bmp\n"
 					, argv[0], argv[0] );
 			badarg = 0;
 			return 0;

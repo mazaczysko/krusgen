@@ -1,4 +1,5 @@
 krusgen
 *.sh
 *.gch
-
+*.xml
+*.o
