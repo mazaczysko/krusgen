@@ -50,14 +50,28 @@ int main( int argc, char **argv )
 				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
 				return 1;
 			}
+			if( mazeInit( ) != 0)
+			{
+				fprintf(stderr, "%s: wrong dimentions!\n", argv[0] );
+				free( maze.maze );
+				badarg = 1;
+				return 1;
+			}
 			badarg = 0;
 		}
 
 		if( !strcmp( argv[i], "-y" ) )
 		{
-			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) || maze.height <= 0 )
+			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) )
 			{
 				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
+				return 1;
+			}
+			if( mazeInit( ) != 0)
+			{
+				fprintf(stderr, "%s: wrong dimentions!\n", argv[0] );
+				free( maze.maze );
+				badarg = 1;
 				return 1;
 			}
 			badarg = 0;
