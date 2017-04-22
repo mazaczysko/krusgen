@@ -1,0 +1,13 @@
+Source: krusgen
+Priority: optional
+Maintainer: Miłosz Ryguła <miloszrygula@interia.pl>
+Build-Depends: debhelper (>= 9.0.0)
+Standards-Version: 3.9.5
+Section: misc
+Homepage: https://github.com/mazaczysko/krusgen
+
+Package: krusgen
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Simple maze generator
