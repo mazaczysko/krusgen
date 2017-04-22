@@ -24,7 +24,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
-#include <obos.h>
+#include <obos/obos.h>
 struct
 {
 	unsigned int width, height;

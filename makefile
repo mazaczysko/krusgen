@@ -26,7 +26,7 @@ libobos/lib/libobos.a:
 
 clean:
 	cd libobos && make clean
-	rm krusgen
+	-rm krusgen
 
 install:
 	-mkdir -p $(DESTDIR)/usr
