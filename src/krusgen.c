@@ -83,8 +83,8 @@ int main( int argc, char **argv )
 					"Usage: %s [OPTIONS]\n\n" \
 					"Supported options:\n" \
 					"\t-h, --help - show help\n" \
-					"\t-x [odd number] - define map width\n" \
-					"\t-y [odd number] - define map height\n" \
+					"\t-x [positive, odd number] - define map width\n" \
+					"\t-y [positive, odd number] - define map height\n" \
 					"\t-t, --txt [file name] - export maze to txt file\n" \
 					"\t-b, --bmp [file name] - export maze to bmp file\n" \
 					"\t-w, --wall [hexadecimal] - define wall color in bmp\n" \
