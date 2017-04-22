@@ -35,6 +35,7 @@ uint16_t flags = 0;
 int main( int argc, char **argv )
 {
 	int i, badarg;
+	char * outputfilename;
 	uint32_t colwall = 0xFFFFFF, colair = 0x000000;
 	FILE *outfile = stdout;
 	maze.width = 31;
@@ -54,7 +55,7 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-y" ) )
 		{
-			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) )
+			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) || maze.height <= 0 )
 			{
 				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
 				return 1;
@@ -87,11 +88,7 @@ int main( int argc, char **argv )
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
 				return 1;
 			}
-			outfile = fopen(argv[++i], "w");
-			if( outfile == NULL )
-			{
-				fprintf(stderr, "%s: cannot open file\n", argv[0] );
-			}
+			outputfilename = argv[++i];
 			flags |= FLAG_TXT;
 			badarg = 0;
 		}
@@ -103,11 +100,7 @@ int main( int argc, char **argv )
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
 				return 1;
 			}
-			outfile = fopen(argv[++i], "w");
-			if( outfile == NULL )
-			{
-				fprintf(stderr, "%s: cannot open file\n", argv[0] );
-			}
+			outputfilename = argv[++i];
 			flags |= FLAG_BMP;
 			badarg = 0;
 		}
@@ -164,6 +157,12 @@ int main( int argc, char **argv )
 	if( flags & FLAG_BMP && flags & FLAG_TXT )
 	{
 		fprintf( stderr, "%s: cannot export to .bmp and .txt files at once\n", argv[0]);
+		return 1;
+	}
+	outfile = fopen( outputfilename, "w");
+	if( outfile == NULL )
+	{
+		fprintf(stderr, "%s: cannot open file\n", argv[0] );
 	}
 	if( flags & FLAG_BMP )
 		mazeBmp( outfile, colwall, colair );
