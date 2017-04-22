@@ -26,7 +26,7 @@
 #include <obos/obos.h>
 #include "maze.h"
 
-#define KRUSGEN_VERSION "v1.0"
+#define KRUSGEN_VERSION "v1.1"
 
 #define FLAG_BMP ( 1 << 0 )
 #define FLAG_TXT ( 1 << 1 )
