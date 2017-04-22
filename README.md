@@ -1,2 +1,2 @@
 # krusgen
-Simple Kruskal's algorithm maze generator
+Kruskal's algorithm maze generator
