@@ -52,7 +52,7 @@ int main( int argc, char **argv )
 			}
 			if( mazeInit( ) != 0)
 			{
-				fprintf(stderr, "%s: wrong dimentions!\n", argv[0] );
+				fprintf(stderr, "%s: wrong dimensions!\n", argv[0] );
 				free( maze.maze );
 				badarg = 1;
 				return 1;
@@ -69,7 +69,7 @@ int main( int argc, char **argv )
 			}
 			if( mazeInit( ) != 0)
 			{
-				fprintf(stderr, "%s: wrong dimentions!\n", argv[0] );
+				fprintf(stderr, "%s: wrong dimensions!\n", argv[0] );
 				free( maze.maze );
 				badarg = 1;
 				return 1;
