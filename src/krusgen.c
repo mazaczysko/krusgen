@@ -1,4 +1,3 @@
-
 /*
 	krusgen - a Kruskal's algorithm maze generator
 	Copyright (C) 2017 Miłosz Ryguła <miloszrygula@interia.pl>
@@ -45,7 +44,7 @@ int main( int argc, char **argv )
 		badarg = 1;
 		if( !strcmp( argv[i], "-x" ) )
 		{
-			if( i + 1 >= argc || !sscanf( argv[++i], "%u", &maze.width ) )
+			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.width ) )
 			{
 				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
 				return 1;
@@ -55,7 +54,7 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-y" ) )
 		{
-			if( i + 1 >= argc || !sscanf( argv[++i], "%u", &maze.height) )
+			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) )
 			{
 				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
 				return 1;
@@ -92,7 +91,6 @@ int main( int argc, char **argv )
 			if( outfile == NULL )
 			{
 				fprintf(stderr, "%s: cannot open file\n", argv[0] );
-				return 1;
 			}
 			flags |= FLAG_TXT;
 			badarg = 0;
@@ -109,8 +107,7 @@ int main( int argc, char **argv )
 			if( outfile == NULL )
 			{
 				fprintf(stderr, "%s: cannot open file\n", argv[0] );
-				return 1;
- 			}
+			}
 			flags |= FLAG_BMP;
 			badarg = 0;
 		}
@@ -156,7 +153,11 @@ int main( int argc, char **argv )
 		fprintf( stderr, "%s: dimensions must be odd!\n", argv[0]);
 		return 1;
 	}
-	mazeInit( );
+	if( mazeInit( ) == 1 )
+	{
+		fprintf( stderr, "%s: memory allocation error!\n", argv[0]);
+		return 1;
+	}
 	mazeGrid( );
 	wallsList( );
 	mazeGen( );
