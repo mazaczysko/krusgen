@@ -35,7 +35,7 @@ uint16_t flags = 0;
 int main( int argc, char **argv )
 {
 	int i, badarg;
-	char * outputfilename;
+	char * outputfilename = NULL;
 	uint32_t colwall = 0xFFFFFF, colair = 0x000000;
 	FILE *outfile = stdout;
 	maze.width = 31;
@@ -155,33 +155,44 @@ int main( int argc, char **argv )
 			return 1;
 		}
 	}
+
 	if( maze.width % 2 == 0 || maze.height % 2 == 0 )
 	{
 		fprintf( stderr, "%s: dimensions must be odd!\n", argv[0]);
 		return 1;
 	}
+
 	if( mazeInit( ) == 1 )
 	{
 		fprintf( stderr, "%s: memory allocation error!\n", argv[0]);
 		return 1;
 	}
+
 	mazeGrid( );
 	wallsList( );
 	mazeGen( );
+
 	if( flags & FLAG_BMP && flags & FLAG_TXT )
 	{
-		fprintf( stderr, "%s: cannot export to .bmp and .txt files at once\n", argv[0]);
+		fprintf( stderr, "%s: cannot export to .bmp and .txt files at once!\n", argv[0]);
 		return 1;
 	}
-	outfile = fopen( outputfilename, "w");
-	if( outfile == NULL )
-	{
-		fprintf(stderr, "%s: cannot open file\n", argv[0] );
+
+	if( outputfilename != NULL) 
+	{	
+		outfile = fopen( outputfilename, "w");
+
+		if( outfile == NULL )
+		{
+			fprintf(stderr, "%s: cannot open file!\n", argv[0] );
+		}
 	}
+
 	if( flags & FLAG_BMP )
 		mazeBmp( outfile, colwall, colair );
 	else
 		mazeDraw( outfile );
+
 	fclose( outfile );
 	return 0;
 }
