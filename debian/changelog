@@ -1,3 +1,11 @@
+krusgen (1.1-1) trusty; urgency=low
+
+  * Multiple bug fixes
+  * Security improvements
+
+ -- Miłosz Ryguła <miloszrygula@interia.pl>  Sun, 23 Apr 2017 00:32:00 +0200
+
+
 krusgen (1.0-1) trusty; urgency=low
 
   * Initial release.
