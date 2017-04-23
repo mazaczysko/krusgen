@@ -7,7 +7,7 @@
 **krusgen** [`OPTIONS`]
 
 ## DESCRIPTION
-Generate a maze of given size, using Kruskal's algorithm.
+Generates a maze of given size, using Kruskal's algorithm.
 **Krusgen** can also export the maze into text (**-t**)  or bmp (**-b**) file, if none of the options is used, maze is exported to **stdout** as text.
 
 Supported options:
