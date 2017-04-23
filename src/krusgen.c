@@ -79,7 +79,7 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-h" ) || !strcmp( argv[i], "--help" ) )
 		{
-			printf(	"%s " KRUSGEN_VERSION " - maze generator\n" \
+			printf(	"%s " KRUSGEN_VERSION " - Kruskal's algorithm maze generator\n" \
 					"Usage: %s [OPTIONS]\n\n" \
 					"Supported options:\n" \
 					"\t-h, --help - show help\n" \
