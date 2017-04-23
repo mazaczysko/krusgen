@@ -1,0 +1,52 @@
+.TH krusgen "23 April 2017" "v1.1"
+.SH NAME
+.PP
+\fBkrusgen\fP \- command line maze generator.
+.SH SYNOPSIS
+.PP
+\fBkrusgen\fP [\fB\fCOPTIONS\fR]
+.SH DESCRIPTION
+.PP
+Generate a maze of given size, using Kruskal's algorithm.
+\fBKrusgen\fP can also export the maze into text (\fB\-t\fP)  or bmp (\fB\-b\fP) file, if none of the options is used, maze is exported to \fBstdout\fP as text.
+.PP
+Supported options:
+.PP
+\fB\-h\fP, \fB\-\-help\fP \- show help message
+.PP
+\fB\-x\fP <\fB\fCpositive, odd number\fR> \- define map width, if not used, width is set automatically to 31
+.PP
+\fB\-y\fP <\fB\fCpositive, odd number\fR> \- define map height, if not used, height is set automatically to 31
+.PP
+\fB\-t\fP, \fB\-\-txt\fP <\fB\fCfilename\fR> \- export maze as text to given filename
+.PP
+\fB\-b\fP, \fB\-\-bmp\fP <\fB\fCfilename\fR> \- export maze as bitmap (BMP2 format) to given filename
+.PP
+\fB\-w\fP, \fB\-\-wall\fP <\fB\fChex color\fR> \- define wall color in bitmap
+.PP
+\fB\-a\fP, \fB\-\-air\fP <\fB\fChex color\fR> \- define air color in bitmap
+.SH EXAMPLES
+.PP
+\fBkrusgen \-x 51 \-y 17\fP \- export maze of 51 characters width and 17 characters height to \fBstdout\fP as text.
+.PP
+\fBkrusgen \-b test.bmp\fP \- export maze of default dimensions as image to \fBtest.bmp\fP file.
+.PP
+\fBkrusgen \-t test.txt\fP \- export maze of default dimensions as text to \fBtest.txt\fP file.
+.PP
+\fBkrusgen \-y 25 \-x 37 \-b colors.bmp \-a FF0000 \-w FFFF00\fP \- export maze of 37 characters width and 25 characters height as image with red air and yellow walls to \fBcolors.bmp\fP file.
+.SH AUTHOR
+.PP
+Written by Miłosz Ryguła \[la]miloszrygula@interia.pl\[ra]\&.
+\fBKrusgen\fP uses \fBlibobos\fP library created by Jacek Wieczorek \[la]mrjjot@gmail.com\[ra]\&.
+.SH REPORTING BUGS
+.PP
+Bugs can be reported as issues on Krusgen's Github page: \[la]https://github.com/mazaczysko/krusgen/issues\[ra]
+.SH Copyright
+.PP
+\fBKrusgen\fP and \fBlibobos\fP are both licensed under GNU GPLv3 license.
+.PP
+Copyright (C) 2017 Miłosz Ryguła \[la]miloszrygula@interia.pl\[ra] 
+Free Software Foundation, Inc.  License GPLv3+: GNU
+GPL version 3 or later \[la]http://gnu.org/licenses/gpl.html\[ra]\&.
+This is free software: you are free  to  change  and  redistribute  it.
+There is NO WARRANTY, to the extent permitted by law.
