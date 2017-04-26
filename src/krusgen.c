@@ -39,6 +39,7 @@ int main( int argc, char **argv )
 	FILE *outfile = stdout;
 	maze.width = 31;
 	maze.height = 31;
+	unsigned int seed = time( NULL );
 	for( i = 1; i < argc; i++)
 	{
 		badarg = 1;
@@ -82,9 +83,11 @@ int main( int argc, char **argv )
 					"Usage: %s [OPTIONS]\n\n" \
 					"Supported options:\n" \
 					"\t-h, --help - show help\n" \
+					"\t-v, --version - show Krusgen's version\n" \
 					"\t-x [positive, odd number] - define map width\n" \
 					"\t-y [positive, odd number] - define map height\n" \
 					"\t-f, --frame - displays frame around the maze\n" \
+					"\t-s, --seed [seed] - define seed to generate maze\n" \
 					"\t-t, --txt [file name] - export maze to txt file\n" \
 					"\t-b, --bmp [file name] - export maze to bmp file\n" \
 					"\t-w, --wall [hexadecimal] - define wall color in bmp\n" \
@@ -155,6 +158,29 @@ int main( int argc, char **argv )
 			badarg = 0;
 		}
 
+		if( !strcmp( argv[i], "--seed" ) || !strcmp( argv[i], "-s" ) )
+		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+
+			if( sscanf( argv[++i], "%u", &seed ) != 1)
+			{
+				fprintf( stderr, "%s: bad value '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			badarg = 0;
+		}
+
+		if( !strcmp( argv[i], "-v") || !strcmp( argv[i], "--version" ) )
+			{
+				printf("%s " KRUSGEN_VERSION "\n", argv[0] );
+				badarg = 0;
+				return 0;
+			}
+
 		if (badarg)
 		{
 			fprintf(stderr, "%s: bad argument '%s'\n", argv[0], argv[i]);
@@ -174,6 +200,7 @@ int main( int argc, char **argv )
 		return 1;
 	}
 
+	srand( seed );
 	mazeGrid( );
 	wallsList( );
 	mazeGen( );

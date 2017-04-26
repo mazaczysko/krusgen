@@ -94,7 +94,6 @@ void mazeFlood( uint16_t x, uint16_t y, uint32_t old, uint32_t val )
 
 void mazeGen( )
 {
-	srand( time( NULL ) );
 	while( maze.wallcnt )
 	{
 		unsigned int r = rand( ) % maze.wallcnt, w = 0, h = 0;
