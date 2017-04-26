@@ -25,6 +25,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <obos/obos.h>
+#include "krusgen.h"
+
 struct
 {
 	unsigned int width, height;
@@ -50,14 +52,29 @@ void mazeGrid( )
 	uint16_t i, j, k = 1;
 	for( j = 0; j< maze.height; j++ )
 	{
-		if( j % 2 == 0  )
+		if( j % 2 == !!( flags & FLAG_FRAME ) )
 		{
 			for( i = 0; i < maze.width; i++)
 			{
-				if( i % 2 == 0 )
+				if( i % 2 == !!( flags && FLAG_FRAME ) )
 					maze.maze[i][j] = k++;
 			}
 		}
+	}
+
+	if( flags & FLAG_FRAME )
+	{
+		for( i = 0; i < maze.height; i++ )
+						maze.maze[0][i] = 0;
+
+		for ( i = 0; i < maze.width; i++ )
+						maze.maze[i][0] = 0;
+
+		for( i = 0; i < maze.height; i++ )
+						maze.maze[maze.width - 1][i] = 0;
+
+		for( i = 0; i < maze.width ; i++ )
+						maze.maze[i][maze.height - 1] = 0;
 	}
 }
 
@@ -164,11 +181,11 @@ void mazeBmp( FILE *f, uint32_t colwall, uint32_t colair )
 		for( j = 0; j < maze.height; j++ )
 			if ( maze.maze[i][j] )
 			{
-				bmp.imageData[i][j].colnum = colwall;
+				bmp.imageData[i][j].colnum = colair;
 			}
 			else
 			{
-				bmp.imageData[i][j].colnum = colair;
+				bmp.imageData[i][j].colnum = colwall;
 			}
 	}
 	bmpWrite( &bmp, f );

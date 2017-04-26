@@ -25,11 +25,10 @@
 #include <string.h>
 #include <obos/obos.h>
 #include "maze.h"
+#include "krusgen.h"
 
 #define KRUSGEN_VERSION "v1.1"
 
-#define FLAG_BMP ( 1 << 0 )
-#define FLAG_TXT ( 1 << 1 )
 uint16_t flags = 0;
 
 int main( int argc, char **argv )
@@ -85,6 +84,7 @@ int main( int argc, char **argv )
 					"\t-h, --help - show help\n" \
 					"\t-x [positive, odd number] - define map width\n" \
 					"\t-y [positive, odd number] - define map height\n" \
+					"\t-f, --frame - displays frame around the maze\n" \
 					"\t-t, --txt [file name] - export maze to txt file\n" \
 					"\t-b, --bmp [file name] - export maze to bmp file\n" \
 					"\t-w, --wall [hexadecimal] - define wall color in bmp\n" \
@@ -149,6 +149,12 @@ int main( int argc, char **argv )
 			badarg = 0;
 		}
 
+		if( !strcmp( argv[i], "-f" ) || !strcmp( argv[i], "--frame" ) )
+		{
+			flags |= FLAG_FRAME;
+			badarg = 0;
+		}
+
 		if (badarg)
 		{
 			fprintf(stderr, "%s: bad argument '%s'\n", argv[0], argv[i]);
@@ -178,8 +184,8 @@ int main( int argc, char **argv )
 		return 1;
 	}
 
-	if( outputfilename != NULL) 
-	{	
+	if( outputfilename != NULL)
+	{
 		outfile = fopen( outputfilename, "w");
 
 		if( outfile == NULL )
