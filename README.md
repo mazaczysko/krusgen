@@ -27,6 +27,12 @@ Supported options:
 
 - `-y` <`positive, odd number`> - define map height, if not used, height is set automatically to 31
 
+- `-f` / `--frame` - add borders to maze
+
+- `-s` / `--seed` <`seed`> - set random generator's seed
+
+- `-v` / `--version` - displays krusgen version
+
 - `-t` / `--txt` <`filename`> - export maze as text to given filename
 
 - `-b` / `--bmp` <`filename`> - export maze as bitmap (BMP2 format) to given filename

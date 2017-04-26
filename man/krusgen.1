@@ -18,13 +18,19 @@ Supported options:
 .PP
 \fB\-y\fP <\fB\fCpositive, odd number\fR> \- define map height, if not used, height is set automatically to 31
 .PP
+\fB\-f\fP, \fB\-\-frame\fP \- add borders to maze
+.PP
+\fB\-s\fP, \fB\-\-seed\fP <\fB\fCseed\fR> \- set random generator's seed
+.PP
+\fB\-v\fP, \fB\-\-version\fP \- displays krusgen version
+.PP
 \fB\-t\fP, \fB\-\-txt\fP <\fB\fCfilename\fR> \- export maze as text to given filename
 .PP
 \fB\-b\fP, \fB\-\-bmp\fP <\fB\fCfilename\fR> \- export maze as bitmap (BMP2 format) to given filename
 .PP
-\fB\-w\fP, \fB\-\-wall\fP <\fB\fChex color\fR> \- define wall color in bitmap
+\fB\-w\fP, \fB\-\-wall\fP <\fB\fChex color\fR> \- define wall color in bitmap, if not used wall color is white
 .PP
-\fB\-a\fP, \fB\-\-air\fP <\fB\fChex color\fR> \- define air color in bitmap
+\fB\-a\fP, \fB\-\-air\fP <\fB\fChex color\fR> \- define air color in bitmap, if not used air color is black
 .SH EXAMPLES
 .PP
 \fBkrusgen \-x 51 \-y 17\fP \- export maze of 51 characters width and 17 characters height to \fBstdout\fP as text.

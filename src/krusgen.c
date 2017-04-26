@@ -86,8 +86,9 @@ int main( int argc, char **argv )
 					"\t-v, --version - show Krusgen's version\n" \
 					"\t-x [positive, odd number] - define map width\n" \
 					"\t-y [positive, odd number] - define map height\n" \
-					"\t-f, --frame - displays frame around the maze\n" \
+					"\t-f, --frame - add borders to maze\n" \
 					"\t-s, --seed [seed] - define seed to generate maze\n" \
+					"\t-v, --version - displays krusgen version\n" \
 					"\t-t, --txt [file name] - export maze to txt file\n" \
 					"\t-b, --bmp [file name] - export maze to bmp file\n" \
 					"\t-w, --wall [hexadecimal] - define wall color in bmp\n" \

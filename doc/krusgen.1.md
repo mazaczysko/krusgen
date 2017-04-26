@@ -18,13 +18,19 @@ Supported options:
 
 **-y** <`positive, odd number`> - define map height, if not used, height is set automatically to 31
 
+**-f**, **--frame** - add borders to maze
+
+**-s**, **--seed** <`seed`> - set random generator's seed
+
+**-v**, **--version** - displays krusgen version
+
 **-t**, **--txt** <`filename`> - export maze as text to given filename
 
 **-b**, **--bmp** <`filename`> - export maze as bitmap (BMP2 format) to given filename
 
-**-w**, **--wall** <`hex color`> - define wall color in bitmap
+**-w**, **--wall** <`hex color`> - define wall color in bitmap, if not used wall color is white
 
-**-a**, **--air** <`hex color`> - define air color in bitmap
+**-a**, **--air** <`hex color`> - define air color in bitmap, if not used air color is black
 
 ## EXAMPLES
 **krusgen -x 51 -y 17** - export maze of 51 characters width and 17 characters height to **stdout** as text.
