@@ -1,3 +1,13 @@
+krusgen (1.2-1) trusty; urgency=low
+
+  * Bump to v1.2.
+  * Add frame option.
+  * Add seed option.
+  * Add version option.
+  * Minor changes.
+
+ -- Miłosz Ryguła <miloszrygula@interia.pl>  Wed, 26 Apr 2017 20:58:00 +0200
+
 krusgen (1.1-4) trusty; urgency=low
 
   * Minor changes.
