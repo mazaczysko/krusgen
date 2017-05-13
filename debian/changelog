@@ -1,3 +1,14 @@
+
+krusgen (1.3-1) trusty; urgency=low
+
+  * Bump to v1.3.
+  * Add changing wall and air character option.
+  * Minor changes.
+  * Fix bugs.
+  * Update help, README, manual.
+
+ -- Miłosz Ryguła <miloszrygula@interia.pl>  Sat, 13 May 2017 19:00:00 +0200
+
 krusgen (1.2-1) trusty; urgency=low
 
   * Bump to v1.2.
