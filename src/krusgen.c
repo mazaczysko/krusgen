@@ -27,7 +27,7 @@
 #include "maze.h"
 #include "krusgen.h"
 
-#define KRUSGEN_VERSION "v1.2"
+#define KRUSGEN_VERSION "v1.3"
 
 uint16_t flags = 0;
 

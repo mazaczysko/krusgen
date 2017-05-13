@@ -1,4 +1,4 @@
-# krusgen 1 "23 April 2017" "v1.2"
+# krusgen 1 "23 April 2017" "v1.3"
 
 ## NAME
 **krusgen** - command line maze generator.
