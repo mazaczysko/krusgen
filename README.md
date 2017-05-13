@@ -40,3 +40,7 @@ Supported options:
 - `-w` / `--wall` <`hex color`> - define wall color in bitmap
 
 - `-a` / `--air` <`hex color`> - define air color in bitmap
+
+- `-W` / `--wallchar` <`character`> - define wall character
+
+- `-A` / `--airchar` <`character`> - define air character

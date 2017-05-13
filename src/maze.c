@@ -151,7 +151,7 @@ int wallsList( )
 	return 0;
 }
 
-void mazeDraw( FILE *f )
+void mazeDraw( FILE *f, char wallchr, char airchr  )
 {
 	uint16_t i, j;
 	for( i = 0; i < maze.height; i++ )
@@ -159,11 +159,11 @@ void mazeDraw( FILE *f )
 		for( j = 0; j < maze.width; j++ )
 			if ( maze.maze[j][i] )
 			{
-				fprintf(f, " ");
+				fprintf(f, "%c", airchr);
 			}
 			else
 			{
-				fprintf(f, "#");
+				fprintf(f, "%c", wallchr);
 			}
 		fprintf(f, "\n");
 	}

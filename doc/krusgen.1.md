@@ -1,4 +1,4 @@
-# krusgen "23 April 2017" "v1.2"
+# krusgen 1 "23 April 2017" "v1.2"
 
 ## NAME
 **krusgen** - command line maze generator.
@@ -32,6 +32,10 @@ Supported options:
 
 **-a**, **--air** <`hex color`> - define air color in bitmap, if not used air color is black
 
+**-W**, **--wallchar** <`character`> - define wall character, if not used wall character is #
+
+**-A**, **--airchar** <`character`> - define air character, if not used air character is ' '                 
+
 ## EXAMPLES
 **krusgen -x 51 -y 17** - export maze of 51 characters width and 17 characters height to **stdout** as text.
 
@@ -40,6 +44,8 @@ Supported options:
 **krusgen -t test.txt** - export maze of default dimensions as text to **test.txt** file.
 
 **krusgen -y 25 -x 37 -b colors.bmp -a FF0000 -w FFFF00** - export maze of 37 characters width and 25 characters height as image with red air and yellow walls to **colors.bmp** file.
+
+**krusgen -W o -A \(** - export maze which has 'o' as walls and '(' as air to **stdout**.
 
 ## AUTHOR
 Written by Miłosz Ryguła <miloszrygula@interia.pl>.

@@ -1,4 +1,4 @@
-.TH krusgen "23 April 2017" "v1.2"
+.TH krusgen 1 "23 April 2017" "v1.2"
 .SH NAME
 .PP
 \fBkrusgen\fP \- command line maze generator.
@@ -31,6 +31,10 @@ Supported options:
 \fB\-w\fP, \fB\-\-wall\fP <\fB\fChex color\fR> \- define wall color in bitmap, if not used wall color is white
 .PP
 \fB\-a\fP, \fB\-\-air\fP <\fB\fChex color\fR> \- define air color in bitmap, if not used air color is black
+.PP
+\fB\-W\fP, \fB\-\-wallchar\fP <\fB\fCcharacter\fR> \- define wall character, if not used wall character is #
+.PP
+\fB\-A\fP, \fB\-\-airchar\fP <\fB\fCcharacter\fR> \- define air character, if not used air character is ' '                 
 .SH EXAMPLES
 .PP
 \fBkrusgen \-x 51 \-y 17\fP \- export maze of 51 characters width and 17 characters height to \fBstdout\fP as text.
@@ -40,6 +44,8 @@ Supported options:
 \fBkrusgen \-t test.txt\fP \- export maze of default dimensions as text to \fBtest.txt\fP file.
 .PP
 \fBkrusgen \-y 25 \-x 37 \-b colors.bmp \-a FF0000 \-w FFFF00\fP \- export maze of 37 characters width and 25 characters height as image with red air and yellow walls to \fBcolors.bmp\fP file.
+.PP
+\fBkrusgen \-W o \-A (\fP \- export maze which has 'o' as walls and '(' as air to \fBstdout\fP\&.
 .SH AUTHOR
 .PP
 Written by Miłosz Ryguła \[la]miloszrygula@interia.pl\[ra]\&.

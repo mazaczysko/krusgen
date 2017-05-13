@@ -34,6 +34,7 @@ uint16_t flags = 0;
 int main( int argc, char **argv )
 {
 	int i, badarg;
+	char wallchr = '#', airchr = ' ';
 	char * outputfilename = NULL;
 	uint32_t colwall = 0xFFFFFF, colair = 0x000000;
 	FILE *outfile = stdout;
@@ -92,7 +93,9 @@ int main( int argc, char **argv )
 					"\t-t, --txt [file name] - export maze to txt file\n" \
 					"\t-b, --bmp [file name] - export maze to bmp file\n" \
 					"\t-w, --wall [hexadecimal] - define wall color in bmp\n" \
-					"\t-a, --air [hexadecimal] - define air color in bmp\n"
+					"\t-a, --air [hexadecimal] - define air color in bmp\n" \
+					"\t-W, --wallchar [character] - define wall character\n" \
+					"\t-A, --airchar [character] - define air character\n"
 					, argv[0], argv[0] );
 			badarg = 0;
 			return 0;
@@ -182,6 +185,28 @@ int main( int argc, char **argv )
 				return 0;
 			}
 
+		if( !strcmp( argv[i], "--wallchar" ) || !strcmp( argv[i], "-W" ) )
+		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			wallchr = argv[++i][0];
+			badarg = 0;
+		}
+
+		if( !strcmp( argv[i], "--airchar" ) || !strcmp( argv[i], "-A" ) )
+		{
+			if( i + 1 >= argc )
+			{
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
+				return 1;
+			}
+			airchr =  argv[++i][0];
+			badarg = 0;
+		}
+
 		if (badarg)
 		{
 			fprintf(stderr, "%s: bad argument '%s'\n", argv[0], argv[i]);
@@ -219,13 +244,14 @@ int main( int argc, char **argv )
 		if( outfile == NULL )
 		{
 			fprintf(stderr, "%s: cannot open file!\n", argv[0] );
+			return 1;
 		}
 	}
 
 	if( flags & FLAG_BMP )
 		mazeBmp( outfile, colwall, colair );
 	else
-		mazeDraw( outfile );
+		mazeDraw( outfile, wallchr, airchr );
 
 	fclose( outfile );
 	return 0;

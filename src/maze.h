@@ -35,7 +35,7 @@ extern void mazeGrid( );
 extern void mazeFlood( uint16_t x, uint16_t y, uint32_t old, uint32_t val );
 extern void mazeGen( );
 extern int wallsList( );
-extern void mazeDraw( FILE *f );
+extern void mazeDraw( FILE *f, char wallchr, char airchr );
 extern void mazeBmp( FILE *f, uint32_t colwall, uint32_t colair );
 
 #endif
