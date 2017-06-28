@@ -54,7 +54,7 @@ Written by Miłosz Ryguła <miloszrygula@interia.pl>.
 ## REPORTING BUGS
 Bugs can be reported as issues on Krusgen's Github page: https://github.com/mazaczysko/krusgen/issues
 
-## Copyright
+## COPYRIGHT
 **Krusgen** and **libobos** are both licensed under GNU GPLv3 license.
 
 Copyright (C) 2017 Miłosz Ryguła <miloszrygula@interia.pl>
