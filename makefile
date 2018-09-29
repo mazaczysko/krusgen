@@ -18,8 +18,14 @@
 
 # This is makefile for krusgen - a Kruskal's algorithm maze generator
 
+CC = gcc
+CFLAGS = -Wall
+LIBS = -lobos -Llibobos/lib
+INCLUDES = -Ilibobos/include
+SRC = ./src/*.c
+
 all: clean libobos/lib/libobos.a
-	gcc -o krusgen src/krusgen.c src/maze.c -lobos -Wall -Ilibobos/include -Llibobos/lib
+	$(CC) -o krusgen $(SRC) $(INCLUDES) $(LIBS) $(CFLAGS)
 
 libobos/lib/libobos.a:
 	cd libobos && make all

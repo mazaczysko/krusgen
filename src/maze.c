@@ -56,7 +56,7 @@ void mazeGrid( )
 		{
 			for( i = 0; i < maze.width; i++)
 			{
-				if( i % 2 == !!( flags && FLAG_FRAME ) )
+				if( i % 2 == !!( flags & FLAG_FRAME ) )
 					maze.maze[i][j] = k++;
 			}
 		}

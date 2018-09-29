@@ -8,7 +8,7 @@ typedef union
 	struct
 	{
 		uint8_t b, g, r;
-	} __attribute__( ( packed ) );;
+	} __attribute__( ( packed ) );
 	uint32_t colnum;
 } Pixel;
 
