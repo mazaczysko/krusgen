@@ -1,6 +1,6 @@
 # krusgen
 [![The GPL license](https://img.shields.io/badge/license-GPL-blue.svg?style=flat-square)](http://opensource.org/licenses/GPL-3.0)
-[![Travis CI](https://img.shields.io/travis/mazaczysko/krusgen/master.svg?style=flat-square)](https://travis-ci.org/mazaczysko/krusgen/master)
+[![Travis CI](https://img.shields.io/travis/mazaczysko/krusgen/master.svg?style=flat-square)](https://travis-ci.org/mazaczysko/krusgen)
 
 [Krusgen on Launchpad...](https://launchpad.net/krusgen)
 
