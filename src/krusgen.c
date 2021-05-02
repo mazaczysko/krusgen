@@ -234,6 +234,8 @@ int main( int argc, char **argv )
 	if( flags & FLAG_BMP && flags & FLAG_TXT )
 	{
 		fprintf( stderr, "%s: cannot export to .bmp and .txt files at once!\n", argv[0]);
+		free(maze.maze);
+		free(maze.walls);
 		return 1;
 	}
 
@@ -244,6 +246,8 @@ int main( int argc, char **argv )
 		if( outfile == NULL )
 		{
 			fprintf(stderr, "%s: cannot open file!\n", argv[0] );
+			free(maze.maze);
+			free(maze.walls);
 			return 1;
 		}
 	}
@@ -254,5 +258,7 @@ int main( int argc, char **argv )
 		mazeDraw( outfile, wallchr, airchr );
 
 	fclose( outfile );
+	free(maze.maze);
+	free(maze.walls);
 	return 0;
 }
