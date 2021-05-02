@@ -19,6 +19,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
 #include <stdio.h>
 #include <inttypes.h>
 #include <time.h>
@@ -26,13 +27,9 @@
 #include <string.h>
 #include <obos/obos.h>
 #include "krusgen.h"
+#include "maze.h"
 
-struct
-{
-	unsigned int width, height;
-	uint16_t **walls;
-	uint32_t **maze, wallcnt;
-}maze;
+struct maze maze;
 
 uint8_t mazeInit( )
 {

@@ -23,12 +23,14 @@
 #define MAZE_H
 #include <inttypes.h>
 
-struct
+struct maze
 {
 	unsigned int width, height;
 	uint16_t **walls;
 	uint32_t **maze, wallcnt;
-}maze;
+};
+
+extern struct maze maze;
 
 extern uint8_t mazeInit( );
 extern void mazeGrid( );
