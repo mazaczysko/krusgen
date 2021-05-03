@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include <time.h>
+#include <sys/time.h>
 #include <stdlib.h>
 #include <string.h>
 #include <obos/obos.h>
@@ -40,7 +41,10 @@ int main( int argc, char **argv )
 	FILE *outfile = stdout;
 	maze.width = 31;
 	maze.height = 31;
-	unsigned int seed = time( NULL );
+	struct timeval tv;
+	gettimeofday( &tv, NULL );
+	unsigned long long int seed = tv.tv_sec * 1000000 + tv.tv_usec;
+
 	for( i = 1; i < argc; i++)
 	{
 		badarg = 1;
@@ -48,7 +52,7 @@ int main( int argc, char **argv )
 		{
 			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.width ) )
 			{
-				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
+				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i-1]);
 				return 1;
 			}
 			if( mazeInit( ) != 0)
@@ -65,7 +69,7 @@ int main( int argc, char **argv )
 		{
 			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) )
 			{
-				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i]);
+				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i-1]);
 				return 1;
 			}
 			if( mazeInit( ) != 0)
@@ -170,7 +174,7 @@ int main( int argc, char **argv )
 				return 1;
 			}
 
-			if( sscanf( argv[++i], "%u", &seed ) != 1)
+			if( sscanf( argv[++i], "%llu", &seed ) != 1)
 			{
 				fprintf( stderr, "%s: bad value '%s'\n", argv[0], argv[i] );
 				return 1;
