@@ -50,15 +50,20 @@ int main( int argc, char **argv )
 		badarg = 1;
 		if( !strcmp( argv[i], "-x" ) )
 		{
-			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.width ) )
+			if( i + 1 >= argc )
 			{
-				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i-1]);
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i]);
 				return 1;
 			}
-			if( mazeInit( ) != 0)
+			if( !sscanf( argv[++i], "%d", &maze.width ) )
 			{
-				fprintf(stderr, "%s: wrong dimensions!\n", argv[0] );
-				free( maze.maze );
+				fprintf(stderr, "%s: bad value for '%s'\n", argv[0], argv[i-1]);
+				return 1;
+			}
+
+			if( maze.width <= 0 || maze.width % 2 == 0 )
+			{
+				fprintf( stderr, "%s: bad value for '%s': dimensions must be odd and positive!\n", argv[0], argv[i-1]);
 				badarg = 1;
 				return 1;
 			}
@@ -67,15 +72,20 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-y" ) )
 		{
-			if( i + 1 >= argc || !sscanf( argv[++i], "%d", &maze.height) )
+			if( i + 1 >= argc )
 			{
-				fprintf(stderr, "%s: bad value for %s\n", argv[0], argv[i-1]);
+				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i]);
 				return 1;
 			}
-			if( mazeInit( ) != 0)
+			if( !sscanf( argv[++i], "%d", &maze.height ) )
 			{
-				fprintf(stderr, "%s: wrong dimensions!\n", argv[0] );
-				free( maze.maze );
+				fprintf(stderr, "%s: bad value for '%s'\n", argv[0], argv[i-1]);
+				return 1;
+			}
+
+			if( maze.height <= 0 || maze.height % 2 == 0 )
+			{
+				fprintf( stderr, "%s: bad value for '%s': dimensions must be odd and positive!\n", argv[0], argv[i-1]);
 				badarg = 1;
 				return 1;
 			}
@@ -218,28 +228,9 @@ int main( int argc, char **argv )
 		}
 	}
 
-	if( maze.width % 2 == 0 || maze.height % 2 == 0 )
-	{
-		fprintf( stderr, "%s: dimensions must be odd!\n", argv[0]);
-		return 1;
-	}
-
-	if( mazeInit( ) == 1 )
-	{
-		fprintf( stderr, "%s: memory allocation error!\n", argv[0]);
-		return 1;
-	}
-
-	srand( seed );
-	mazeGrid( );
-	wallsList( );
-	mazeGen( );
-
 	if( flags & FLAG_BMP && flags & FLAG_TXT )
 	{
 		fprintf( stderr, "%s: cannot export to .bmp and .txt files at once!\n", argv[0]);
-		free(maze.maze);
-		free(maze.walls);
 		return 1;
 	}
 
@@ -250,11 +241,28 @@ int main( int argc, char **argv )
 		if( outfile == NULL )
 		{
 			fprintf(stderr, "%s: cannot open file!\n", argv[0] );
-			free(maze.maze);
-			free(maze.walls);
 			return 1;
 		}
 	}
+
+	if( mazeInit( ) == 1 )
+	{
+		fprintf( stderr, "%s: memory allocation error!\n", argv[0]);
+		return 1;
+	}
+
+	mazeGrid( );
+	
+	if( wallsList( ) == 1 )
+	{
+		fprintf( stderr, "%s: memory allocation error!\n", argv[0]);
+		free( maze.maze );
+		return 1;
+	}
+
+	srand( seed );
+	mazeGen( );
+
 
 	if( flags & FLAG_BMP )
 		mazeBmp( outfile, colwall, colair );

@@ -25,7 +25,7 @@
 
 struct maze
 {
-	unsigned int width, height;
+	int width, height;
 	uint16_t **walls;
 	uint32_t **maze, wallcnt;
 };
