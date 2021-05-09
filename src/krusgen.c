@@ -270,7 +270,14 @@ int main( int argc, char **argv )
 		mazeDraw( outfile, wallchr, airchr );
 
 	fclose( outfile );
+	
+	for( i = 0; i < maze.width; i++ )
+		free(maze.maze[i]);
 	free(maze.maze);
+
+	for( i = 0; i < maze.wallCNT; i++ )
+		free(maze.walls[i]);
 	free(maze.walls);
+
 	return 0;
 }

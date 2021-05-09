@@ -27,7 +27,7 @@ struct maze
 {
 	int width, height;
 	uint16_t **walls;
-	uint32_t **maze, wallcnt;
+	uint32_t **maze, wallcnt, wallCNT;
 };
 
 extern struct maze maze;

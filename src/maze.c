@@ -38,6 +38,8 @@ uint8_t mazeInit( )
 	for ( i = 0; i < maze.width; i++ )
 		if ( ( maze.maze[i] = (uint32_t*) calloc( maze.height, sizeof( uint32_t ) ) ) == NULL )
 		{
+			for( i-=1; i >= 0; i-- )
+				free( maze.maze[i] );
 			free( maze.maze );
 			return 1;
 		}
@@ -124,11 +126,15 @@ int wallsList( )
 			}
 		}
 	}
-	maze.wallcnt = c;
+	maze.wallCNT = c;
+	maze.wallcnt = maze.wallCNT;
+	
 	if ( ( maze.walls = (uint16_t**) calloc(c, sizeof( uint16_t* ) ) ) == NULL ) return 1;
 		for ( i = 0; i < c; i++ )
 		if ( ( maze.walls[i] = (uint16_t*) calloc( 2, sizeof( uint16_t ) ) ) == NULL )
 		{
+			for( i-=1; i >= 0; i-- )
+				free( maze.walls[i] );
 			free( maze.walls );
 			return 1;
 		}
