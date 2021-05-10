@@ -3,3 +3,5 @@ krusgen
 *.gch
 *.xml
 *.o
+*.txt
+*.bmp

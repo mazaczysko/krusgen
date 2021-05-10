@@ -26,6 +26,15 @@
 #define FLAG_BMP ( 1 << 0 )
 #define FLAG_TXT ( 1 << 1 )
 #define FLAG_FRAME ( 1 << 2 )
+#define FLAG_X ( 1 << 3 )
+#define FLAG_Y ( 1 << 4 )
+#define FLAG_WALL ( 1 << 5 )
+#define FLAG_AIR ( 1 << 6 )
+#define FLAG_SEED ( 1 << 7 )
+#define FLAG_WALLCHAR ( 1 << 8 )
+#define FLAG_AIRCHAR ( 1 << 9 )
+
+
 extern uint16_t flags;
 
 #endif

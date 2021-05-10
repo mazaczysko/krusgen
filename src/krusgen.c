@@ -50,6 +50,11 @@ int main( int argc, char **argv )
 		badarg = 1;
 		if( !strcmp( argv[i], "-x" ) )
 		{
+			if( flags & FLAG_X )
+				fprintf( stderr, "%s: 'FLAG_X' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_X;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i]);
@@ -72,6 +77,11 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "-y" ) )
 		{
+			if( flags & FLAG_Y )
+				fprintf( stderr, "%s: 'FLAG_Y' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_Y;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i]);
@@ -118,6 +128,9 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--txt" ) || !strcmp( argv[i], "-t" ) )
 		{
+			if( flags & FLAG_TXT )
+				fprintf( stderr, "%s: 'FLAG_TXT' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
@@ -130,6 +143,9 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--bmp" ) || !strcmp( argv[i], "-b" ) )
 		{
+			if( flags & FLAG_BMP )
+				fprintf( stderr, "%s: 'FLAG_BMP' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
@@ -142,6 +158,11 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--air" ) || !strcmp( argv[i], "-a" ) )
 		{
+			if( flags & FLAG_AIR )
+				fprintf( stderr, "%s: 'FLAG_AIR' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_AIR;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
@@ -157,6 +178,11 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--wall" ) || !strcmp( argv[i], "-w" ) )
 		{
+			if( flags & FLAG_WALL )
+				fprintf( stderr, "%s: 'FLAG_WALL' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_WALL;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
@@ -178,6 +204,11 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--seed" ) || !strcmp( argv[i], "-s" ) )
 		{
+			if( flags & FLAG_SEED )
+				fprintf( stderr, "%s: 'FLAG_SEED' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_SEED;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
@@ -201,6 +232,11 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--wallchar" ) || !strcmp( argv[i], "-W" ) )
 		{
+			if( flags & FLAG_WALLCHAR )
+				fprintf( stderr, "%s: 'FLAG_WALLCHAR' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_WALLCHAR;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
@@ -212,6 +248,11 @@ int main( int argc, char **argv )
 
 		if( !strcmp( argv[i], "--airchar" ) || !strcmp( argv[i], "-A" ) )
 		{
+			if( flags & FLAG_AIRCHAR )
+				fprintf( stderr, "%s: 'FLAG_AIRCHAR' used multiple times. Last declared value will be assigned.\n", argv[0]);
+			
+			flags |= FLAG_AIRCHAR;
+
 			if( i + 1 >= argc )
 			{
 				fprintf(stderr, "%s: missing value for '%s'\n", argv[0], argv[i] );
